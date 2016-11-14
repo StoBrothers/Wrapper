@@ -12,7 +12,7 @@ http://www.oracle.com/
 Install Apache Maven 
 https://maven.apache.org
 
-How run a project?
+How to run a project?
 --------------------------
 
 ```
