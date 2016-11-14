@@ -3,7 +3,6 @@ package module;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-
 import module.base.HtmlWrapper;
 import module.loader.WrapperLoader;
 
@@ -28,8 +27,6 @@ public class ThirdModule {
         " positions 56 through 67 → Twitter username",
         " positions 37 through 54 → Link" };
     
-    private static final String etalonResultString = "<strong>Obama</strong> visited <strong>Facebook</strong> headquarters: <a href=\"http://bit.ly/xyz\">http://bit.ly/xyz</a> @<a href=\"http://twitter.com/elversatile\">elversatile</a>";
-
     public static void main(String[] args) {
         
         // Get and initialization all wrappers in app  
@@ -39,7 +36,7 @@ public class ThirdModule {
         String resultString = new Executor().buildString(ThirdModule.INPUT_STRING,
             ThirdModule.PARAMETERS_STRINGS, parsers);
 
-        if (!resultString.equals(etalonResultString)) {
+        if (!resultString.equals(OUTPUT_STRING)) {
             ThirdModule.logger.error(" Received wrong result : " + resultString);
         }
     }
