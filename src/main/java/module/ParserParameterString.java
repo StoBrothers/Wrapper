@@ -30,8 +30,9 @@ public class ParserParameterString {
      * Parse string to ValueTag object. 
      * @param parameter input parameters string
      * @return wrapping parameters 
+     * @throws Exception 
      */
-    public Tag parseString (String parameter) {
+    public Tag parseString (String parameter) throws Exception {
         
         logger.info(String.format("Parse parameter string: %s ", parameter));
 
@@ -40,25 +41,25 @@ public class ParserParameterString {
         //check substring with type of tag 
         if ((startTypeOfTag = parameter.lastIndexOf(DIRECTION_STR)) == -1) {
             logger.error("Parameters are not contains tag.");
-            return null;
+            throw new Exception("Parameter tag is not valid");
         }
         //check substring with position parameter
         if ((startPositions = parameter.indexOf(POSITIONS)) == -1) {
             logger.error("Parameters are not contains start position.");
-            return null;
+            throw new Exception("Parameter startPositions is not valid");
         }
 
         //check substring with through parameter
         if ((startThrough = parameter.indexOf(THROUGH, startPositions)) == -1) {
             logger.error("Parameters are not contains end position.");
-            return null;
+            throw new Exception("Parameter endPositions is not valid");
         }
         // Get name tag 
         String nameTag  = parameter.substring(startTypeOfTag + DIRECTION_LENGTH);
         
         if ((nameTag == null) || (nameTag.length() == 0)) {
             logger.error("Parameters are not contains tag.");
-            return null;
+            throw new Exception("Parameter tag is not valid");
         }
         
         // Get value "positions" 
@@ -72,15 +73,15 @@ public class ParserParameterString {
          through_int = Integer.parseInt(through.trim());
         } catch (NumberFormatException nfe) {
             logger.error("Postions are not parsed.", nfe);
-            return null;
+            throw nfe;
         }
         
         if (position_int == null || through_int == null) {
             logger.error("Postions are not parsed.");
-            return null;
+            throw new Exception("Parameters positions are not valid");
         }
         
-        Tag value = new ValueTag(position_int.intValue(), through_int.intValue(), nameTag);
+        Tag value = new ValueTag(position_int.intValue(), through_int.intValue(), nameTag.trim());
         
         return value;
     }

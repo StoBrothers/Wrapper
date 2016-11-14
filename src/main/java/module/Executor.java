@@ -20,10 +20,11 @@ public class Executor {
     Logger logger = Logger.getLogger(Executor.class);
 
     public String buildString(String inputString, String[] positions,
-        Map<String, HtmlWrapper> parsers) {
-
+        Map<String, HtmlWrapper> parsers) throws Exception {
+        // Parser only one string with params 
         ParserParameterString parser = new ParserParameterString();
 
+        // Get tags list 
         ArrayList<Tag> tagList = buildParametersList(positions, parser);
 
         char[] result = inputString.toCharArray();
@@ -49,7 +50,9 @@ public class Executor {
             if ((currentWrapper = parsers.get(val.getTagName())) != null) {
                 resultBuilder.append(currentWrapper.wrap(token));// add wrapped string
             } else {
-                    logger.error(String.format("Not existed wrapper for  %s  tag", val.getTagName())); 
+                String errorMessage = String.format("Not existed wrapper for  %s  tag", val.getTagName());
+                logger.error(errorMessage);
+                throw new Exception(errorMessage);
             }
         }
 
@@ -69,9 +72,10 @@ public class Executor {
      * @param positions 
      * @param parser
      * @return
+     * @throws Exception 
      */
     private ArrayList<Tag> buildParametersList(String[] positions,
-        ParserParameterString parser) {
+        ParserParameterString parser) throws Exception {
         
         // Storage of Value Tag entity with name of tag and parameters for executing
         // After fulfilling this list it will be sorted
@@ -80,9 +84,11 @@ public class Executor {
          // Parse string with parameters to execute and add to list
         for (String parameter : positions) {
             Tag parseString = parser.parseString(parameter);
-            if (parseString != null) {
-            tagList.add(parseString);
+            if (parseString == null) {
+                throw new Exception("Parameters is not valid");
             }
+            tagList.add(parseString);
+            
         }
         // sort by start position
         tagList.sort ((o1, o2)-> o1.getStartPosition()- o2.getStartPosition());

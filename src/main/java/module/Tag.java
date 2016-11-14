@@ -1,8 +1,8 @@
 package module;
 
 /**
- * 
- * 
+ * Parsed information about wrapping one string.
+ *
  * @author Sergey Stotskiy
  *
  */

@@ -1,6 +1,6 @@
 # wrapper
 
-Wrapper.
+HTML Wrapper.
    
 ========================
 
@@ -24,19 +24,16 @@ Example of execution:
 
 WrapperLoader[INFO] - Was founded 3 wrappers
 
-ParserParameterString[INFO] - Parse parameter string:  positions 14 through 22 òÆÒ Entity
+ParserParameterString[INFO] - Parse parameter string:  positions 14 through 22 -> Entity
 
-ParserParameterString[INFO] - Parse parameter string:  positions 0 through 5 òÆÒ Entity
+ParserParameterString[INFO] - Parse parameter string:  positions 0 through 5 -> Entity
 
-ParserParameterString[INFO] - Parse parameter string:  positions 56 through 67 òÆÒ Twitter username
+ParserParameterString[INFO] - Parse parameter string:  positions 56 through 67 -> Twitter username
 
-ParserParameterString[INFO] - Parse parameter string:  positions 37 through 54 òÆÒ Link
+ParserParameterString[INFO] - Parse parameter string:  positions 37 through 54 -> Link
 
 Executor[INFO] - Result : &lt;strong&gt;Obama&lt;/strong&gt; visited &lt;strong&gt;Facebook&lt;/strong&gt; headquarters: &lt;a href=
 &quot;http://bit.ly/xyz &quot;&gt;http://bit.ly/xyz &lt;/a &gt; @&lt;a href=&quot;http://twitter.com/elversatile &quot;&gt;elversatile&lt;/a&gt;
-
-HTML code : <strong>Obama</strong> visited <strong>Facebook</strong> headquarters: <a href=
-"http://bit.ly/xyz">http://bit.ly/xyz</a> @<a href="http://twitter.com/elversatile">elversatile</a>
 
 [INFO] ------------------------------------------------------------------------
 
@@ -45,13 +42,17 @@ HTML code : <strong>Obama</strong> visited <strong>Facebook</strong> headquarter
 [INFO] ------------------------------------------------------------------------
 
 
+Result HTML code : <strong>Obama</strong> visited <strong>Facebook</strong> headquarters: <a href=
+"http://bit.ly/xyz">http://bit.ly/xyz</a> @<a href="http://twitter.com/elversatile">elversatile</a>
+
+
 How to add a new wrapper?
 --------------------------
 
 ```
-1. Please to create a new Wrapper class in a package: module.wrappers and implements HtmlWrapper.
+1. Please create a new Wrapper class in a package module.wrappers which implements HtmlWrapper.
 
-2. Implemented a new methods in your wrapper: 
+2. Implement new methods in your wrapper: 
 
     public String getTagName() {
         return tagName;
@@ -61,12 +62,14 @@ How to add a new wrapper?
         return String.format(formatString, context);
     }
 
-Method getTagName must be return a unique tag for parse and wrap;
+Method getTagName should return a unique tag;
 
-Method  wrap(String context) must be wrap context and return a new String;
+Method  wrap(String context) performs wrapping, it returns a new String based on initial context;
 
-3. Compiled all projects and run it.
+3. Compile project and run it using following commands:
 
+```
+mvn clean install exec:java -Dexec.mainClass="module.ThirdModule"
 ```
 
 author: Sergey Stotskiy

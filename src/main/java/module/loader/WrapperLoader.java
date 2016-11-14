@@ -32,8 +32,9 @@ public class WrapperLoader {
      * Looking and initialization wrappers from package "module.wrappers".
      *
      * @return Map of wrappers.
+     * @throws Exception 
      */
-    public Map<String, HtmlWrapper> initializationWrappers() {
+    public Map<String, HtmlWrapper> initializationWrappers() throws Exception {
 
         Map<String, HtmlWrapper> parsers = new HashMap<>();
 
@@ -49,7 +50,8 @@ public class WrapperLoader {
             }
         } catch (ClassNotFoundException | IOException | InstantiationException
             | IllegalAccessException | IllegalArgumentException e1) {
-            logger.error("Couldn't to instantiate wrapper " + e1);
+            logger.error("Couldn't to instantiate wrapper ",  e1);
+            throw e1;
         }
         return parsers;
     }
@@ -101,7 +103,6 @@ public class WrapperLoader {
         File[] files = directory.listFiles();
         for (File file : files) {
             if (file.isDirectory()) {
-                assert !file.getName().contains(".");
                 classes.addAll(findClasses(file, packageName + "." + file.getName()));
             } else if (file.getName().endsWith(".class")) {
                 classes.add(Class.forName(packageName + '.'

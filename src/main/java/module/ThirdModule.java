@@ -8,7 +8,9 @@ import module.loader.WrapperLoader;
 
  
 /**
- * Parse third module with example of using.
+ * 
+ * Class contains example of using this wrapper.
+ * 
  * 
  * @author Sergey Stotskiy
  *
@@ -28,15 +30,19 @@ public class ThirdModule {
         " positions 37 through 54 → Link" };
     
     public static void main(String[] args) {
-        
-        // Get and initialization all wrappers in app  
-        Map<String, HtmlWrapper> parsers = new WrapperLoader().initializationWrappers();
-        
-        // Executor 
-        String resultString = new Executor().buildString(ThirdModule.INPUT_STRING,
-            ThirdModule.PARAMETERS_STRINGS, parsers);
+        String resultString = null;
+        try {
+            // Get and initialization all wrappers in app  
+            Map<String, HtmlWrapper> parsers = new WrapperLoader().initializationWrappers();
 
-        if (!resultString.equals(OUTPUT_STRING)) {
+            resultString = new Executor().buildString(ThirdModule.INPUT_STRING,
+                ThirdModule.PARAMETERS_STRINGS, parsers);
+        } catch (Exception e) {
+            logger.error("Fatal error occures", e);
+            System.exit(1);
+        }
+
+        if (!OUTPUT_STRING.equals(resultString)) {
             ThirdModule.logger.error(" Received wrong result : " + resultString);
         }
     }
