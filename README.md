@@ -33,7 +33,7 @@ ParserParameterString[INFO] - Parse parameter string:  positions 56 through 67 Ú
 ParserParameterString[INFO] - Parse parameter string:  positions 37 through 54 Ú∆“ Link
 
 Executor[INFO] - Result : &lt;strong&gt;Obama&lt;/strong&gt; visited &lt;strong&gt;Facebook&lt;/strong&gt; headquarters: &lt;a href=
-&quot;http://bit.ly/xyz&quot;&gt;http://bit.ly/xyz&lt;/a&gt; @&lt;a href=&quot;http://twitter.com/elversatile&quot;&gt;elversatile&lt;/a&gt;
+&quot;http://bit.ly/xyz &quot;&gt;http://bit.ly/xyz&lt;/a&gt; @&lt;a href=&quot;http://twitter.com/elversatile &quot;&gt;elversatile&lt;/a&gt;
 
 HTML code : <strong>Obama</strong> visited <strong>Facebook</strong> headquarters: <a href=
 "http://bit.ly/xyz">http://bit.ly/xyz</a> @<a href="http://twitter.com/elversatile">elversatile</a>
