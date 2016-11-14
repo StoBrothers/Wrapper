@@ -61,13 +61,13 @@ How to add a new wrapper?
         return String.format(formatString, context);
     }
 
-Method "getTagName" must be return a unique tag for parse and wrap;
+Method getTagName must be return a unique tag for parse and wrap;
 
 Method  wrap(String context) must be wrap context and return a new String;
 
-```
 3. Compiled all projects and run it.
 
+```
 
 author: Sergey Stotskiy
 
