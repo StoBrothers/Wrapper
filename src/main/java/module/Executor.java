@@ -48,6 +48,8 @@ public class Executor {
 
             if ((currentWrapper = parsers.get(val.getTagName())) != null) {
                 resultBuilder.append(currentWrapper.wrap(token));// add wrapped string
+            } else {
+                    logger.error(String.format("Not existed wrapper for  %s  tag", val.getTagName())); 
             }
         }
 
@@ -57,8 +59,9 @@ public class Executor {
                 .append(Arrays.copyOfRange(result, startPosition, result.length));
         }
         
-        logger.info("Result : " + resultBuilder.toString());
-        return resultBuilder.toString();
+        String outputString = resultBuilder.toString();
+        logger.info("Result : " + outputString);
+        return outputString;
     }
 
     /**
